@@ -9,9 +9,4 @@ class ArtistsController < ApplicationController
         erb :"artists/show"
     end 
     
-    get '/artists/new' do
-        @artists = Song.all
-        erb :"artists/new"
-    end 
-    
 end
