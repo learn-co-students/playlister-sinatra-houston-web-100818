@@ -6,9 +6,9 @@ class SongsController < ApplicationController
         erb :"songs/index"
     end
 
-    get '/songs/:id' do
-        @song = Song.find(params[:id])
-        @genres = SongGenre.find_by(song_id: params[:id])
+    get '/songs/:slug' do
+        @song = Song.find_by_slug(params[:slug])
+        @genres = SongGenre.find_by(song_id: @song.id)
         erb :"songs/show"
     end 
     
