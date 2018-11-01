@@ -6,4 +6,13 @@
 <%end%>
 </p></li>
 </ul>
-
+<form action="/songs/<%=@song.slug%>" method="POST">
+<input id="hidden" type="hidden" name="_method" value="DELETE">
+<input type="submit" value="delete">
+</form>
+<br>
+<a href="/songs/<%=@song.slug%>/edit"><button>Edit</button></a>
+<br><br>
+<%if flash.has?(:message)%>
+    <%=flash[:message]%>
+<%end%>
