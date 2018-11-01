@@ -12,6 +12,7 @@ class SongsController < ApplicationController
     end 
 
     get '/songs/:slug/edit' do
+        @genres = Genre.all
         @song = Song.find_by_slug(params[:slug])
         erb :"songs/edit"
     end 
@@ -22,8 +23,9 @@ class SongsController < ApplicationController
         
         @song.update(name: params["name"], artist: artist)
 
+        
         params["genres"].each do |genre|
-            SongGenre.create(genre_id: genre, song_id: @song.id)
+            SongGenre.where(song_id: @song.id, genre_id: genre.to_i).first_or_create
         end 
         
          redirect "/songs/#{@song.slug}"
@@ -36,11 +38,11 @@ class SongsController < ApplicationController
 
     post '/songs' do
         artist = Artist.find_or_create_by(name: params["artist"])
-        new_song = Song.create(name: params["name"], artist: artist)
+        @new_song = Song.create(name: params["name"], artist: artist)
         params["genres"].each do |genre|
-            SongGenre.create(genre_id: genre, song_id: new_song.id)
+            SongGenre.create(genre_id: genre, song_id: @new_song.id)
         end 
-        redirect '/songs'
+        redirect "/songs/#{@new_song.slug}"
     end 
     
   
