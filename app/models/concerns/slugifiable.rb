@@ -3,7 +3,7 @@ require_relative '../../../config/environment'
 class Slugifiable
 # slugify an object's name by stripping out special chars & replacing spaces with '-'
   def self.slug(name)
-    name.downcase.gsub(/[^0-9A-Za-z ]/,'').gsub(/ /, '-')
+    name.downcase.gsub(/[^0-9A-Za-z -]/,'').gsub(/ /, '-')
   end
 
   # use slug method to retrieve an object from db and return that entry
