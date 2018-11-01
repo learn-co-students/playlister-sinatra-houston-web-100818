@@ -12,5 +12,5 @@ class Genre < ActiveRecord::Base
   def self.find_by_slug(slug)
     Slugifiable.find_by_slug(slug, self)
   end
-  
+
 end

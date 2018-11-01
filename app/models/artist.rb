@@ -1,4 +1,4 @@
-require_relative 'concerns/slugifiable'
+# require_relative 'concerns/slugifiable'
 
 class Artist < ActiveRecord::Base
   has_many :songs
