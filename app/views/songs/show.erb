@@ -1,0 +1,18 @@
+<h1 class=jumbotron><%=@song.name%></h1>
+<ul>
+    <li><p>Artist: <a href="/artists/<%=@song.artist.slug%>"><%=@song.artist.name%></a></p></li>
+    <li><p>Genre: <% @song.genres.each do |genre|%>
+<a href="/genres/<%=genre.slug%>"><%=genre.name%></a>
+<%end%>
+</p></li>
+</ul>
+<form action="/songs/<%=@song.slug%>" method="POST">
+<input id="hidden" type="hidden" name="_method" value="DELETE">
+<input type="submit" value="delete">
+</form>
+<br>
+<a href="/songs/<%=@song.slug%>/edit"><button>Edit</button></a>
+<br><br>
+<%if flash.has?(:message)%>
+    <%=flash[:message]%>
+<%end%>
